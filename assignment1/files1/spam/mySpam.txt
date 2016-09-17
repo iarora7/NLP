@@ -1,0 +1,2 @@
+this is spam file.
+It should contain garbled data.
