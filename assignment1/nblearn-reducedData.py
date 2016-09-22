@@ -12,6 +12,9 @@ spam_dict = {}
 spam_file_count = 0
 ham_file_count = 0
 
+spam_file_limit = 749
+ham_file_limit = 953
+
 def readFile(fpath, label_dict):
     myfile = open(fpath, 'r', encoding='latin1')
     filedata = myfile.read().split()
@@ -29,14 +32,24 @@ for dirName, subdirList, fileList in os.walk(path):
         fpath = os.path.join(dirName, fname)
         # if "DS_Store" in fpath:
         #     break
-        if "ham" in fpath:
-            label_dict = ham_dict
-            ham_file_count += 1
-        else:
-            label_dict = spam_dict
-            spam_file_count += 1
-        readFile(fpath, label_dict)
 
+        # exit for loop after
+        if(ham_file_count>ham_file_limit and spam_file_count>spam_file_limit):
+            break
+
+        if "ham" in fpath:
+            if(ham_file_count < ham_file_limit):
+                ham_file_count += 1
+                label_dict = ham_dict
+            else:
+                break
+        else:
+            if(spam_file_count < spam_file_limit):
+                label_dict = spam_dict
+                spam_file_count += 1
+            else:
+                break
+        readFile(fpath, label_dict)
 
 spam_wc = 0
 ham_wc = 0

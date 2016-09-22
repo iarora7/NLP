@@ -1,6 +1,7 @@
 import os;
 import json
 import sys
+import re
 
 path = r"/Users/isha/USC/sem3/NLP/assignments/nlp/assignment1/files/train"
 # path = r"/Users/isha/USC/sem3/NLP/assignments/nlp/assignment1/Sample/train"
@@ -12,16 +13,26 @@ spam_dict = {}
 spam_file_count = 0
 ham_file_count = 0
 
+stop_words = []
+stop_file = open('stopwords.txt','r')
+for word in stop_file:
+    word = word.strip()
+    stop_words.append(word)
+
 def readFile(fpath, label_dict):
     myfile = open(fpath, 'r', encoding='latin1')
     filedata = myfile.read().split()
     for word in filedata:
-        # word = word.lower()
-        vocab.add(word)
-        if word in label_dict:
-            label_dict[word] += 1
+        word = word.lower()
+        word = re.sub("[^a-zA-z0-9]", "", word)
+        if word in stop_words:
+            break
         else:
-            label_dict[word] = 1
+            vocab.add(word)
+            if word in label_dict:
+                label_dict[word] += 1
+            else:
+                label_dict[word] = 1
 
 
 for dirName, subdirList, fileList in os.walk(path):

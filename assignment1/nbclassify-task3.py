@@ -1,6 +1,7 @@
 import json
 import os
 import math
+import re
 
 path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/files/dev"
 # path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/Sample/dev"
@@ -13,6 +14,12 @@ ham_file_count = 0
 spam_wc = 0
 ham_wc = 0
 vocab_wc = 0
+
+stop_words = []
+stop_file = open('stopwords.txt','r')
+for word in stop_file:
+    word = word.strip()
+    stop_words.append(word)
 
 output_file = open('nboutput.txt', 'w')
 
@@ -54,20 +61,26 @@ for dirName, subdirList, fileList in os.walk(path):
         p_word_ham = 1
         word_count = 0
         for word in test_data:
-            # word = word.lower()
-            if word in word_dict:
-                word_dict[word][0] += 1
+            word = word.lower()
+            word = re.sub("[^a-zA-z0-9]", "", word)
+            if word in stop_words:
+                # print("break", word)
+                break
             else:
-                word_count = 1
-                if word in spam_dict:
-                    p_word_spam = (spam_dict[word]+1)/(spam_wc+vocab_wc)
+                if word in word_dict:
+                    # print("added to dic", word)
+                    word_dict[word][0] += 1
                 else:
-                    p_word_spam = 1/(spam_wc+vocab_wc)
-                if word in ham_dict:
-                    p_word_ham = (ham_dict[word]+1)/(ham_wc+vocab_wc)
-                else:
-                    p_word_ham = 1/(ham_wc+vocab_wc)
-                word_dict[word] = [word_count, math.log(p_word_spam), math.log(p_word_ham)]
+                    word_count = 1
+                    if word in spam_dict:
+                        p_word_spam = (spam_dict[word]+1)/(spam_wc+vocab_wc)
+                    else:
+                        p_word_spam = 1/(spam_wc+vocab_wc)
+                    if word in ham_dict:
+                        p_word_ham = (ham_dict[word]+1)/(ham_wc+vocab_wc)
+                    else:
+                        p_word_ham = 1/(ham_wc + vocab_wc)
+                    word_dict[word] = [word_count, math.log(p_word_spam), math.log(p_word_ham)]
         log_p_doc_spam = 0
         log_p_doc_ham = 0
         for key in word_dict:
@@ -82,5 +95,6 @@ for dirName, subdirList, fileList in os.walk(path):
             output_file.write("SPAM " + fpath + "\n")
         else:
             output_file.write("HAM " + fpath + "\n")
+
 
 

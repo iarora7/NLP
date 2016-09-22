@@ -21,10 +21,10 @@ for file in lines:
             ham_negative += 1
 
 
-print(spam_negative+spam_positive+ham_negative+ham_positive)
+total = spam_negative+spam_positive+ham_negative+ham_positive
 print("spam_negative:",spam_negative)
 print("spam_positive:",spam_positive)
 print("ham_negative:",ham_negative)
 print("ham_positive:",ham_positive)
 
-print((spam_positive+ham_positive)/5175)
+print((spam_positive+ham_positive)/total)
