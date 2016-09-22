@@ -2,10 +2,11 @@ import json
 import os
 import math
 import re
+import sys
 
-path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/files/dev"
+# path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/files/dev"
 # path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/Sample/dev"
-# path = sys.argv[1]
+path = sys.argv[1]
 
 ham_dict = {}
 spam_dict = {}
@@ -64,11 +65,9 @@ for dirName, subdirList, fileList in os.walk(path):
             word = word.lower()
             word = re.sub("[^a-zA-z0-9]", "", word)
             if word in stop_words:
-                # print("break", word)
                 break
             else:
                 if word in word_dict:
-                    # print("added to dic", word)
                     word_dict[word][0] += 1
                 else:
                     word_count = 1

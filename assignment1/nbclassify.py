@@ -1,10 +1,11 @@
 import json
 import os
 import math
+import sys
 
-path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/files/dev"
+# path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/files/dev"
 # path = r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment1/Sample/dev"
-# path = sys.argv[1]
+path = sys.argv[1]
 
 ham_dict = {}
 spam_dict = {}

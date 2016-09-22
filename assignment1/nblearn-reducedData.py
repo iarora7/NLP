@@ -2,9 +2,9 @@ import os;
 import json
 import sys
 
-path = r"/Users/isha/USC/sem3/NLP/assignments/nlp/assignment1/files/train"
+# path = r"/Users/isha/USC/sem3/NLP/assignments/nlp/assignment1/files/train"
 # path = r"/Users/isha/USC/sem3/NLP/assignments/nlp/assignment1/Sample/train"
-# path = sys.argv[1]
+path = sys.argv[1]
 
 vocab = set()
 ham_dict = {}
