@@ -21,14 +21,23 @@ Name: Isha Arora
 
 
 3. Description of enhancement(s)
-a) all words lowered in training and development data to be consistent - No significant change in perfomance
+a. all words lowered in training and development data to be consistent - No significant change in perfomance
+0.9922801213123794  Precision SPAM
+0.9509360877985797  Precision HAM
+0.9793197278911565 Recall SPAM
+0.982 Recall HAM
+0.9857573267597919 F1 SPAM
+0.9662184322728764 F1 HAM
 
-b) removed special chars (kept only letters and alphabets) + a) - Slightly better performance
+after remove special chars
+0.9964098315382491  Precision SPAM
+0.9569131832797427  Precision HAM
+0.9817687074829932 Recall SPAM
+0.992 Recall HAM
+0.9890350877192983 F1 SPAM
+0.9741407528641571 F1 HAM
 
-c) removing stop words + b) - performance dropped drastically for development data
-
-4. Best performance results based on enhancements.
-(The performance dropped when the words were lowered, special characters and stop words were removed)
+after removing stop words
 0.9202800969566388  Precision SPAM
 0.8229665071770335  Precision HAM
 0.929795918367347 Recall SPAM

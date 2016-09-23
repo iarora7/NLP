@@ -72,13 +72,15 @@ for dirName, subdirList, fileList in os.walk(path):
                 else:
                     word_count = 1
                     if word in spam_dict:
-                        p_word_spam = (spam_dict[word]+1)/(spam_wc+vocab_wc)
-                    else:
-                        p_word_spam = 1/(spam_wc+vocab_wc)
+                        p_word_spam = (spam_dict[word] + 1) / (spam_wc + vocab_wc)
+                    elif word in ham_dict:
+                        p_word_spam = 1 / (spam_wc + vocab_wc)
+
                     if word in ham_dict:
-                        p_word_ham = (ham_dict[word]+1)/(ham_wc+vocab_wc)
-                    else:
-                        p_word_ham = 1/(ham_wc + vocab_wc)
+                        p_word_ham = (ham_dict[word] + 1) / (ham_wc + vocab_wc)
+                    elif word in spam_dict:
+                        p_word_ham = 1 / (ham_wc + vocab_wc)
+
                     word_dict[word] = [word_count, math.log(p_word_spam), math.log(p_word_ham)]
         log_p_doc_spam = 0
         log_p_doc_ham = 0

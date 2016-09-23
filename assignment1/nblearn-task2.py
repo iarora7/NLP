@@ -30,8 +30,8 @@ def readFile(fpath, label_dict):
 for dirName, subdirList, fileList in os.walk(path):
     for fname in fileList:
         fpath = os.path.join(dirName, fname)
-        # if "DS_Store" in fpath:
-        #     break
+        if "DS_Store" in fpath or "__MACOSX" in fpath:
+            break
 
         # exit for loop after
         if(ham_file_count>ham_file_limit and spam_file_count>spam_file_limit):

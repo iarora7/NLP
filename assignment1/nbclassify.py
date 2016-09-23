@@ -46,8 +46,8 @@ print(prob_ham)
 for dirName, subdirList, fileList in os.walk(path):
     for fname in fileList:
         fpath = os.path.join(dirName, fname)
-        # if "DS_Store" in fpath:
-        #     break
+        if "DS_Store" in fpath or "__MACOSX" in fpath:
+            break
         my_file = open(fpath, 'r', encoding='latin1')
         test_data = my_file.read().split()
         word_dict = {}
@@ -62,12 +62,14 @@ for dirName, subdirList, fileList in os.walk(path):
                 word_count = 1
                 if word in spam_dict:
                     p_word_spam = (spam_dict[word]+1)/(spam_wc+vocab_wc)
-                else:
+                elif word in ham_dict:
                     p_word_spam = 1/(spam_wc+vocab_wc)
+
                 if word in ham_dict:
                     p_word_ham = (ham_dict[word]+1)/(ham_wc+vocab_wc)
-                else:
+                elif word in spam_dict:
                     p_word_ham = 1/(ham_wc+vocab_wc)
+
                 word_dict[word] = [word_count, math.log(p_word_spam), math.log(p_word_ham)]
         log_p_doc_spam = 0
         log_p_doc_ham = 0

@@ -38,8 +38,8 @@ def readFile(fpath, label_dict):
 for dirName, subdirList, fileList in os.walk(path):
     for fname in fileList:
         fpath = os.path.join(dirName, fname)
-        # if "DS_Store" in fpath:
-        #     break
+        if "DS_Store" in fpath or "__MACOSX" in fpath:
+            break
         if "ham" in fpath:
             label_dict = ham_dict
             ham_file_count += 1
