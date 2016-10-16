@@ -2,7 +2,7 @@ Assignment 1 Report
 
 Name: Isha Arora
 
-1. Performance on development data with 100% of training data
+1. Performance on development data with 100% of training data (with add one smoothing)
 0.993076710052617  Precision SPAM
 0.9430946291560103  Precision HAM
 0.97578231292517 Recall SPAM
@@ -21,11 +21,13 @@ Name: Isha Arora
 
 
 3. Description of enhancement(s)
-a) all words lowered in training and development data to be consistent - No significant change in perfomance
+a) all words lowered in training and development data to be consistent - No significant change in performance
 
 b) removed special chars (kept only letters and alphabets) + a) - Slightly better performance
 
 c) removing stop words + b) - performance dropped drastically for development data
+
+d) add one smoothing performed as part of task 1 increased the performance drastically
 
 4. Best performance results based on enhancements.
 (The performance dropped when the words were lowered, special characters and stop words were removed)
