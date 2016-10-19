@@ -21,6 +21,7 @@ output_file = open(opfile, 'w')
 model_file = open("per_model.txt", 'r', encoding="latin1")
 file_data = model_file.read()
 model_file.close()
+os.remove("per_model.txt")
 file_data = json.loads(file_data)
 for k in file_data:
     if (k == "b"):
