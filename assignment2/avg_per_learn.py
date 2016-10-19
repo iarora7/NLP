@@ -19,16 +19,20 @@ ud=defaultdict(int)
 beta=0
 c=1
 file_count=0
-file_list=[]
 maxitr = 2
 all_files=dict()
 
 def readFile(fpath):
+    global file_count
+    file_count += 1
     myfile = open(fpath, 'r', encoding="latin1")
     filedata = myfile.read().split()
-    all_files[fpath] = filedata
+    if "spam" in fpath:
+        key = file_count
+    else:
+        key = -file_count
+    all_files[key] = filedata
     for word in filedata:
-        word = word.lower()
         if word in wd:
             continue
         else:
@@ -41,17 +45,16 @@ for dirName, subdirList, fileList in os.walk(path):
         if "DS_Store" in fpath or "__MACOSX" in fpath:
             break
         else:
-            file_count += 1
-            file_list.append(fpath)
             readFile(fpath)
 
+mylist = list(all_files.keys())
 for i in range(0, maxitr):
-    random.shuffle(file_list)
-    for fpath in file_list:
+    random.shuffle(mylist)
+    for fpath in mylist:
         a = 0
         xd = defaultdict(int)
         filedata = all_files[fpath]
-        if "spam" in fpath:
+        if fpath>0:
             y = 1
         else:
             y = -1
