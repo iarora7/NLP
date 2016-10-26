@@ -3,12 +3,12 @@ import json
 import random
 import sys
 import time
-from collections import defaultdict
+from collections import defaultdict, Counter
 
-# path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/train"
-# path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files1"
+path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/train"
 # path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/Sample/train"
-path = sys.argv[1]
+# path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files1"
+# path = sys.argv[1]
 # path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/Sample/train"
 # path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/files/train"
 
@@ -19,25 +19,32 @@ ud=defaultdict(int)
 beta=0
 c=1
 file_count=0
-maxitr = 2
-all_files=dict()
+maxitr = 30
+all_files=defaultdict(int)
+all_file_xd=defaultdict(int)
+all_files_y=defaultdict(int)
 
 def readFile(fpath):
     global file_count
     file_count += 1
+    xd = defaultdict(int)
     myfile = open(fpath, 'r', encoding="latin1")
     filedata = myfile.read().split()
     if "spam" in fpath:
         key = file_count
+        all_files_y[key] = 1
     else:
         key = -file_count
+        all_files_y[key] = -1
     all_files[key] = filedata
     for word in filedata:
         if word in wd:
-            continue
+            xd[word] += 1
         else:
             wd[word] = 0
             ud[word] = 0
+            xd[word] = 1
+    all_file_xd[key] = xd
 
 for dirName, subdirList, fileList in os.walk(path):
     for fname in fileList:
@@ -52,22 +59,10 @@ for i in range(0, maxitr):
     random.shuffle(mylist)
     for fpath in mylist:
         a = 0
-        xd = defaultdict(int)
+        xd = all_file_xd[fpath]
         filedata = all_files[fpath]
-        if fpath>0:
-            y = 1
-        else:
-            y = -1
-        # calculate xd (vector of input data features)
-        for word in filedata:
-            if word in xd:
-                xd[word] = xd[word] + 1
-            else:
-                xd[word] = 1
-        for word in filedata:
-            if(word in wd and word in xd):
-                a += (wd[word] * xd[word])
-        a = a + b
+        y = all_files_y[fpath]
+        a = sum(wd[word] * xd[word] for word in filedata) + b
         if (y * a) <= 0:
             for word in filedata:
                 wd[word] = wd[word] + (y * xd[word])
@@ -86,10 +81,14 @@ data = {
     "wd": ud
 }
 json_data = json.dumps(data)
+
+# if(os.path.isfile('per_model.txt')):
+#     os.remove('per_model.txt')
+#     print("removed")
+
 model = open('per_model.txt', 'w')
 model.write(json_data)
 model.close()
 
-print("filecount:", file_count)
-print("--- %s seconds ---" % (time.time() - start_time))
+print("---avg_per_learn %s seconds ---" % (time.time() - start_time))
 
