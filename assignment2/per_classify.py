@@ -3,10 +3,10 @@ import sys
 import os
 import time
 
-# path = sys.argv[1]
-# opfile = sys.argv[2]
-opfile = 'per_output.txt'
-path=r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/dev"
+path = sys.argv[1]
+opfile = sys.argv[2]
+# opfile = 'per_output.txt'
+# path=r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/dev"
 # path=r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/Sample/test"
 # path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/files/dev"
 
@@ -45,7 +45,7 @@ for dirName, subdirList, fileList in os.walk(path):
                     xd[word] = xd[word] + 1
                 else:
                     xd[word] = 1
-            for word in filedata:
+            for word in xd:
                 if (word in wd and word in xd):
                     a += (wd[word] * xd[word])
             a = a + b
