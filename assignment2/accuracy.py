@@ -2,6 +2,7 @@ import sys
 
 # path = sys.argv[1]
 path = 'per_output.txt'
+# path = '/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/per_output.txt'
 
 labelSpam=0
 labelHam=0
@@ -41,9 +42,9 @@ fham = (2 * pham * rham)/(pham + rham)
 
 weighted_average = ((actaulSpam * fspam)/totalFiles) + ((actualHam * fham)/totalFiles)
 print("Precision Spam: ", pspam)
-print("Precision Ham:  ", pspam)
+print("Precision Ham:  ", pham)
 print("Recall Spam:    ", rspam)
-print("Recall Ham:     ", rspam)
+print("Recall Ham:     ", rham)
 print("F1 Spam:        ", fspam)
 print("F1 Ham:         ", fham)
 print("weighted_average", weighted_average)

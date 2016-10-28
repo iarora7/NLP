@@ -8,9 +8,9 @@ from collections import defaultdict, Counter
 # path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/train"
 # path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/Sample/train"
 # path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files1"
-# path = sys.argv[1]
+path = sys.argv[1]
 # path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/Sample/train"
-path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/files/train"
+# path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/files/train"
 
 start_time = time.time()
 wd=defaultdict(int)
