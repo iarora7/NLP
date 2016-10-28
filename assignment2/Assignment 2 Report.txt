@@ -57,4 +57,4 @@ separate script, please give the name of the script and describe how
 to run it. Explain how you or your code choose the files.
 
 The data provided to us had 17029 files in total out of which there were 7496 spam files and 9533 ham files. I modified my code to take only 10% of each set. Hence the statements spam_limit = 749, ham_limit = 953 (if "spam" in fpath and spam_count < spam_limit and elif "ham" in fpath and ham_count < ham_limit) ensure that only 749 spam files and 953 ham files are picked out of the total pool of train data.
-To run these files, change the spam_limit and ham_limit counts to 10% of the total spam and ham file count respectively.
+To run these files (per_learn_10 and avg_per_learn_10), change the spam_limit and ham_limit counts to 10% of the total spam and ham file count respectively.

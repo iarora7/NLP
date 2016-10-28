@@ -5,8 +5,8 @@ import sys
 from collections import defaultdict,Counter
 import time
 
-path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/train"
-# path = sys.argv[1]
+# path = r"/Users/arorai/USC/sem3/nlp/assignments/NLP/assignment2/files/train"
+path = sys.argv[1]
 # path=r"/Users/isha/USC/sem3/NLP/assignments/NLP/assignment2/files/train"
 
 start_time = time.time()
